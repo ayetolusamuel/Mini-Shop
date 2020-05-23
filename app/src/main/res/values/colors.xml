@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#D05CD803</color>
+    <color name="colorPrimaryDark">#D26DD81C</color>
+    <color name="colorAccent">#CAF5F6F5</color>
+
+    <color name="darkGrey">#a6a6a6 </color>
+    <color name="RatingBar">#ff9900</color>
+    <color name="lightGrey">#B5F6F4F4</color>
+
+
+
+</resources>

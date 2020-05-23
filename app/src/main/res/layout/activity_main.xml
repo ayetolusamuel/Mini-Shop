@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/light_grey_background">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="192dp">
+
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/tint_white_background"
+            app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
+            app:toolbarId="@+id/toolbar">
+
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@android:color/white">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="?actionBarSize"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="6dp"
+                        android:background="@null"
+                        android:fontFamily="@font/metrophobic"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="@string/product_list"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="@android:color/white"
+                        android:visibility="visible" />
+
+                    <androidx.appcompat.widget.SearchView
+                        android:id="@+id/search_product"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:drawablePadding="@dimen/_16_value"
+                        android:fontFamily="@font/metrophobic"
+                        android:gravity="center"
+                        android:hint="@string/search_for_product"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="@android:color/white"
+                        android:visibility="gone"
+                        app:queryBackground="@color/colorAccent"
+                        app:queryHint="search your product here....." />
+
+                    <TextView
+                        android:id="@+id/call"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginEnd="17dp"
+                        android:layout_marginBottom="17dp"
+                        android:background="@drawable/ic_call_black_24dp"
+                        android:foregroundGravity="bottom"
+                        android:padding="@dimen/_16_value" />
+                </RelativeLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+
+                android:layout_marginTop="12dp"
+                android:src="@drawable/akwe_logo"
+                android:contentDescription="@string/company_logo" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
+        android:layout_width="match_parent"
+
+
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="0dp"
+                android:padding="@dimen/_3_value"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/_3_value"
+                tools:listitem="@layout/layout_product"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/emptyList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="272dp"
+                android:text="@string/no_results"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RelativeLayout
+                android:id="@+id/loading"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="@+id/emptyList"
+                app:layout_constraintTop_toBottomOf="@+id/emptyList">
+
+                <com.codingwithset.minie_commerce.ui.HorizontalDottedProgress
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    />
+            </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

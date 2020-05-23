@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/tint_white_background"
+    android:paddingTop="8dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingBottom="3dp"
+
+    android:layout_height="wrap_content">
+
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingLeft="8dp"
+        android:paddingBottom="@dimen/_16_value"
+        android:paddingRight="8dp"
+        >
+
+        <ImageView
+            android:id="@+id/user_image"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/image_loading"/>
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@id/user_image"
+            android:lines="2"
+            android:layout_marginTop="8dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            />
+        <RatingBar
+            android:id="@+id/product_rating"
+            style="?attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/name"
+            android:layout_marginTop="3dp"
+            android:isIndicator="true"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@+id/user_image"
+            android:numStars="5"
+            android:rating="5"
+            android:scaleX="1"
+            android:scaleY="1"
+            android:theme="@style/RatingBar" />
+
+        <TextView
+            android:id="@+id/rate_count"
+            android:layout_toRightOf="@id/product_rating"
+            android:layout_below="@id/name"
+            android:text="(10)"
+            android:layout_marginLeft="3dp"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="June 5, 2020"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/name"
+            android:visibility="gone"
+            android:layout_marginRight="@dimen/_16_value"
+            android:layout_marginTop="@dimen/_3_value"
+
+
+            />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/user_image"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:lineSpacingMultiplier="1.3"
+            android:lines="3"
+            android:text="The dress is great! Very classy and comfortable. It fit perfectly! I'm 5'7 and 130 pounds. I am a 34B chest. This dress would be too long for those who are shorter but could be hemmed. I wouldn't recommend it for those big chested as I am smaller chested and it fit me perfectly. The underarms were not too wide and the dress was made well."
+
+            />
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stock status"
+            android:layout_below="@id/description"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="54dp"
+           android:layout_toLeftOf="@id/quantity_value"
+            android:gravity="center"
+            android:layout_marginTop="3dp"
+            />
+        <TextView
+            android:id="@+id/quantity_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(100)"
+            android:layout_below="@id/description"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/_16_value"
+            android:gravity="center"
+            android:layout_marginTop="3dp"
+            />
+
+        <TextView
+            android:id="@+id/actual_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/description"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="@dimen/_16_value"
+            android:fontFamily="@font/metrophobic"
+            android:gravity="center"
+            android:text="#0.0"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/RatingBar" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

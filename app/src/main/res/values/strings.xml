@@ -1,0 +1,16 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Akwe Shop Mini</string>
+    <string name="no_results">No results \nFetching data........😓</string>
+    <string name="unknown">\?</string>
+    <string name="seller_number_merchant">+2348033739907</string>
+    <string name="seller_number_developer">+2348085385376</string>
+    <string name="retrieve_data" tools:ignore="ExtraTranslation">Retrieving data from web service....\n   Please wait...</string>
+    <string name="network_error">Error in fetching products...\nPlease check internet connection</string>
+    <string name="tel">tel</string>
+    <string name="product_list">Product list</string>
+    <string name="outofstock">outofstock</string>
+    <string name="search_for_product">search for product</string>
+    <string name="company_logo">company logo</string>
+
+
+</resources>
