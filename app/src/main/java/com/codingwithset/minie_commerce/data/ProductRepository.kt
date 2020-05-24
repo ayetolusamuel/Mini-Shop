@@ -22,8 +22,6 @@ class ProductRepository(
     val networkState  = ProductBoundaryCallback(service,cache)
 
 
-
-
     /*
     query web service to retrieve product list and network error.
      */

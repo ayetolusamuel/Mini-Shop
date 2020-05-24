@@ -107,43 +107,58 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="0dp"
-                android:padding="@dimen/_3_value"
                 android:layout_height="0dp"
-                android:layout_marginTop="@dimen/_3_value"
-                tools:listitem="@layout/layout_product"
+                android:padding="@dimen/_3_value"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+
             <TextView
                 android:id="@+id/emptyList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="272dp"
+                android:layout_marginTop="186dp"
                 android:text="@string/no_results"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <RelativeLayout
-                android:id="@+id/loading"
-                android:layout_width="match_parent"
-                android:layout_height="?actionBarSize"
-                android:layout_marginTop="30dp"
-                android:gravity="center"
+            <TextView
+                android:id="@+id/retry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingBottom="8dp"
+                android:text="retry"
+                android:visibility="gone"
+                android:textSize="32sp"
+                android:background="@drawable/tint_white_background"
+                android:textColor="@android:color/holo_blue_light"
+                app:layout_constraintEnd_toEndOf="@+id/emptyList"
                 app:layout_constraintStart_toStartOf="@+id/emptyList"
-                app:layout_constraintTop_toBottomOf="@+id/emptyList">
-
-                <com.codingwithset.minie_commerce.ui.HorizontalDottedProgress
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    />
-            </RelativeLayout>
+                app:layout_constraintTop_toBottomOf="@+id/emptyList" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <RelativeLayout
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:gravity="center"
+        app:layout_anchor="@+id/swipeRefresh"
+        app:layout_anchorGravity="center">
+
+        <com.codingwithset.minie_commerce.ui.HorizontalDottedProgress
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            />
+    </RelativeLayout>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

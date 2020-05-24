@@ -3,6 +3,7 @@ package com.codingwithset.minie_commerce.ui
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.text.Html
 import android.util.Log
@@ -87,6 +88,7 @@ class ProductAdapter(private val context: Context) :
             var quantity = product.stock_quantity.toString()
             if (product.stock_status.equals(context.getString(R.string.outofstock))) {
                 quantity = "0"
+                holder.stockStatus.setTextColor(Color.parseColor("#ff9900"))
             }
             holder.quantity.text = "($quantity)"
 
