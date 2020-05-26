@@ -217,26 +217,5 @@ class ProductActivity : AppCompatActivity() {
         })
     }
 
-    private fun searchItemisEmptyView() {
-
-
-//        mProductAdapter.setProductFilterListener({ count ->
-//            if (count < 1) {
-//                getActivity().runOnUiThread(Runnable {
-//                    mSearchProductErrorName.setText(
-//                        getString(
-//                            R.string.error_message,
-//                            productSearch
-//                        )
-//                    )
-//                    mRelativeLayout.setVisibility(View.VISIBLE)
-//                })
-//            } else {
-//                getActivity().runOnUiThread(
-//                    Runnable { mRelativeLayout.setVisibility(View.GONE) }
-//                )
-//            }
-//        })
-    }
 
 }
