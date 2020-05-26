@@ -36,13 +36,6 @@ class ProductAdapter(private val context: Context) :
         return ProductViewHolder(binding)
     }
 
-//    fun setList(itemsList:PagedList<Products>){
-//        itemList = itemsList
-//    }
-//    fun getList(): PagedList<Products>{
-//        return itemList!!
-//    }
-
     @SuppressLint("NewApi")
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
 
