@@ -20,7 +20,7 @@ class ProductViewModel(private val repository: ProductRepository) : ViewModel() 
     private val filterTextAll: MutableLiveData<String> = MutableLiveData()
 
 
-    val teamAllList = Transformations.switchMap(filterTextAll) {
+    val dataList = Transformations.switchMap(filterTextAll) {
         getAllProductForFilter(it)
     }
 

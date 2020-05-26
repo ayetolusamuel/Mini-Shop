@@ -154,7 +154,6 @@ class ProductActivity : AppCompatActivity() {
         if (show) {
             binding.emptyList.visible()
             binding.recyclerView.gone()
-
             binding.searchProduct.gone()
             binding.loading.visible()
             binding.call.gone()
@@ -190,21 +189,31 @@ class ProductActivity : AppCompatActivity() {
                 return false
             }
 
+            /*
+                trigger as user search for product name
+                if data retrieve base on search keyword is empty the [submitList] should be set to null
+                and the recyclerview should be update to result base on search
+
+             */
             override fun onQueryTextChange(query: String): Boolean {
                 if (query.trim().isNotEmpty()) {
+
+                    // appending '%' so we can allow other characters to be before and after the query string
                     viewModel.setFilterName("%${query}%")
 
-                    viewModel.teamAllList.observe(this@ProductActivity, Observer {
+                    viewModel.dataList.observe(this@ProductActivity, Observer {
                         productAdapter.submitList(null)
                         productAdapter.submitList(it)
 
+                        //if product is not find base on the search keyword the [binding.relLayout] is visible
+                        //hide keyboard
                         if (productAdapter.itemCount == 0) {
                             binding.relLayout.visible()
                             binding.checkProductNameTextView.text =
                                 getString(R.string.error_message, query)
                             hideKeyboard()
                         } else {
-                            binding.relLayout.gone()
+                          binding.relLayout.gone()
                         }
                     })
                 }
