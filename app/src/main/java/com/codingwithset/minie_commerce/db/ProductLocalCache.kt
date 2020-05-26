@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import com.codingwithset.minie_commerce.model.Products
-import com.codingwithset.minie_commerce.utils.checkInternetAccess
 import java.util.concurrent.Executor
 
 /**
@@ -18,7 +17,6 @@ class ProductLocalCache(
 
     private var _productList: MutableLiveData<List<Products>> = MutableLiveData()
     val productList get() = _productList
-    private val _isNetwork: MutableLiveData<Boolean> = MutableLiveData()
 
     init {
         getList()
@@ -60,6 +58,12 @@ class ProductLocalCache(
             _productList.postValue(productDao.productsList())
         }
 
+    }
+
+    //get all product base on the search key which is the name of product
+    //if search word contain in the product name.
+    fun getAllProductForFilter(name: String):DataSource.Factory<Int,Products>{
+        return productDao.getAllProductForFilter(name)
     }
 
 

@@ -2,10 +2,9 @@ package com.codingwithset.minie_commerce.ui
 
 
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.MutableLiveData
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.paging.PagedList
@@ -17,11 +16,20 @@ import com.codingwithset.minie_commerce.databinding.ActivityMainBinding
 import com.codingwithset.minie_commerce.model.Products
 import com.codingwithset.minie_commerce.utils.*
 
+
 class ProductActivity : AppCompatActivity() {
 
     //this handle the viewBinding to avoid findByView
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
+
+
+    //keep track of products list
+    private var productLists: PagedList<Products>? = null
+
+    //[ProductAdapter] field, am using backing scope because [ProductAdapter] accept context
+    private var _productAdapter: ProductAdapter? = null
+    private val productAdapter get() = _productAdapter!!
 
     /*
     viewModel for [ProductViewModel] class
@@ -35,8 +43,7 @@ class ProductActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        //ProductAdapter declare here because it accept context
-        val productAdapter = ProductAdapter(this)
+
 
         // get the view model
         viewModel = ViewModelProvider(this, Injection.provideViewModelFactory(this)).get(
@@ -54,22 +61,8 @@ class ProductActivity : AppCompatActivity() {
             it.callSeller()
         }
 
-
-        /*
-        retrieve [PagedList<Products>] via [ProductViewModel]
-        if null is retrieve via [ProductViewModel] [showEmptyList] function will handle view to display
-        else result is passed to [ProductAdapter]
-         */
-        viewModel.productList.observe(this, Observer {
-            showEmptyList(it.size == 0)
-            productAdapter.submitList(it)
-            binding.recyclerView.apply {
-                adapter = productAdapter
-                layoutManager = LinearLayoutManager(context)
-            }
-
-
-        })
+        //function that handle retrieval of products list
+        getProductList()
 
 
         /*
@@ -117,13 +110,42 @@ class ProductActivity : AppCompatActivity() {
             Toast.makeText(this, "Wooops $it", Toast.LENGTH_SHORT).show()
             binding.retry.visible()
             binding.emptyList.text = getString(R.string.check_internet)
-            binding.retry.visible()
             binding.loading.gone()
+
+            //the retry visibility should be set to gone in as much the product list is not empty
+            if (productLists!!.isNotEmpty())
+                binding.retry.gone()
 
         })
 
 
         binding.root
+    }
+
+    /*
+       retrieve [PagedList<Products>] via [ProductViewModel]
+       if null is retrieve via [ProductViewModel] [showEmptyList] function will handle view to display
+       else result is passed to [ProductAdapter]
+       searchview should also visible the product list is not empty
+        */
+    private fun getProductList() {
+        viewModel.productList.observe(this, Observer {
+            _productAdapter = ProductAdapter(this)
+            showEmptyList(it.size == 0)
+            productLists = it
+            productAdapter.submitList(it)
+            initRecyclerview()
+            binding.searchProduct.visible()
+            initSearchView()
+
+        })
+    }
+
+    private fun initRecyclerview() {
+        binding.recyclerView.apply {
+            adapter = productAdapter
+            layoutManager = LinearLayoutManager(context)
+        }
     }
 
     /*
@@ -155,5 +177,36 @@ class ProductActivity : AppCompatActivity() {
         })
     }
 
+    private fun initSearchView() {
+
+        binding.searchProduct.setOnQueryTextListener(object :
+            SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+
+                return false
+            }
+
+            override fun onQueryTextChange(query: String): Boolean {
+                if (query.trim().isNotEmpty()) {
+
+                    viewModel.setFilterName("%${query}%")
+
+
+                    viewModel.teamAllList.observe(this@ProductActivity, Observer {
+                        productAdapter.submitList(null)
+                        productAdapter.submitList(it)
+
+
+                    })
+                } else {
+                    getProductList()
+                }
+
+
+                // searchItemisEmptyView()
+                return false
+            }
+        })
+    }
 
 }

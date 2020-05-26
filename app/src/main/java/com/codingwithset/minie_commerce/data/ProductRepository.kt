@@ -1,9 +1,12 @@
 package com.codingwithset.minie_commerce.data
 
+import androidx.lifecycle.LiveData
 import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.codingwithset.minie_commerce.api.ProductService
 import com.codingwithset.minie_commerce.db.ProductLocalCache
 import com.codingwithset.minie_commerce.model.ProductResult
+import com.codingwithset.minie_commerce.model.Products
 
 
 /**
@@ -19,7 +22,7 @@ class ProductRepository(
     this field help with network state,
     the field will help for refresh purpose
      */
-    val networkState  = ProductBoundaryCallback(service,cache)
+    val networkState = ProductBoundaryCallback(service, cache)
 
 
     /*
@@ -38,6 +41,22 @@ class ProductRepository(
         return ProductResult(data, networkError)
     }
 
+
+/*
+this function handle the filter purpose
+@param name {accept query which is the name of the product}
+it retrieve the [LiveData<PagedList<Products>>]
+ */
+
+    fun getAllProductForFilter(name: String): LiveData<PagedList<Products>> {
+        //get product list from local database[room]
+        val dataSourceFactory = cache.getAllProductForFilter(name)
+
+        //construct [LivePagedListBuilder] & retrieve [LiveData<PagedList<Products>>], and set [setInitialLoadKey = 10]
+        return LivePagedListBuilder(dataSourceFactory, DATABASE_PAGE_SIZE)
+            .setInitialLoadKey(10)
+            .build()
+    }
 
     /*
 Define the number of items per page, to be retrieved by the paging library.

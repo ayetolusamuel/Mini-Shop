@@ -28,11 +28,11 @@ and set it to 50. Our PagedList will then page data from the DataSource in chunk
         private const val NETWORK_PAGE_SIZE = 50
 
         //you can only perform  Read-Only action with the customer key
-        //customer key retrieve from woocommerce plugin
+        //customer key retrieve from woocommerce plugin Rest-Api
         private const val CUSTOMER_KEY = "ck_7ae18a838d4eef3321447c5fdfd88c96020d0f48"
 
         //you can only perform  Read-Only action with the customer secret
-        //customer secret retrieve from woocommerce plugin
+        //customer secret retrieve from woocommerce plugin Rest-Api
         private const val CUSTOMER_SECRET = "cs_bed4f32d44a97c8bb6e7d23fb3a00b1c762e1969"
     }
 

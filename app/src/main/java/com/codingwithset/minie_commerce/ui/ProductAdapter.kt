@@ -3,13 +3,12 @@ package com.codingwithset.minie_commerce.ui
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
 import android.text.Html
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.TextView
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -18,14 +17,14 @@ import com.codingwithset.currencysign.Utils
 import com.codingwithset.minie_commerce.R
 import com.codingwithset.minie_commerce.databinding.LayoutProductBinding
 import com.codingwithset.minie_commerce.model.Products
-import java.lang.NullPointerException
+
 
 class ProductAdapter(private val context: Context) :
-    PagedListAdapter<Products, ProductViewHolder>(DIFF_CALLBACK) {
+    PagedListAdapter<Products, ProductViewHolder>(DIFF_CALLBACK){
 
     //this handle the viewBinding to avoid findByView
     private var _binding: LayoutProductBinding? = null
-    val binding get() = _binding!!
+    private val binding get() = _binding!!
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -33,9 +32,16 @@ class ProductAdapter(private val context: Context) :
             LayoutInflater.from(parent.context).inflate(R.layout.layout_product, parent, false)
         _binding = LayoutProductBinding.bind(view)
 
-        return ProductViewHolder(binding, context = context)
+
+        return ProductViewHolder(binding)
     }
 
+//    fun setList(itemsList:PagedList<Products>){
+//        itemList = itemsList
+//    }
+//    fun getList(): PagedList<Products>{
+//        return itemList!!
+//    }
 
     @SuppressLint("NewApi")
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
@@ -86,9 +92,9 @@ class ProductAdapter(private val context: Context) :
             //if the product is outofstock the quantity should be 0
             //else display the quantity
             var quantity = product.stock_quantity.toString()
-            if (product.stock_status.equals(context.getString(R.string.outofstock))) {
+           if (product.stock_status.equals(context.getString(R.string.outofstock))) {
                 quantity = "0"
-                holder.stockStatus.setTextColor(Color.parseColor("#ff9900"))
+               // holder.stockStatus.setTextColor(Color.parseColor("#ff9900"))
             }
             holder.quantity.text = "($quantity)"
 
@@ -132,7 +138,7 @@ class ProductAdapter(private val context: Context) :
 
 }
 
-class ProductViewHolder(binding: LayoutProductBinding, val context: Context) :
+class ProductViewHolder(binding: LayoutProductBinding) :
     RecyclerView.ViewHolder(binding.root) {
     val name = binding.name
     val shortDescription = binding.description

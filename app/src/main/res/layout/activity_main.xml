@@ -49,21 +49,7 @@
                         android:textColorHint="@android:color/white"
                         android:visibility="visible" />
 
-                    <androidx.appcompat.widget.SearchView
-                        android:id="@+id/search_product"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@android:color/white"
-                        android:drawablePadding="@dimen/_16_value"
-                        android:fontFamily="@font/metrophobic"
-                        android:gravity="center"
-                        android:hint="@string/search_for_product"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@android:color/white"
-                        android:textColorHint="@android:color/white"
-                        android:visibility="gone"
-                        app:queryBackground="@color/colorAccent"
-                        app:queryHint="search your product here....." />
+
 
                     <TextView
                         android:id="@+id/call"
@@ -85,8 +71,25 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
 
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="1dp"
                 android:src="@drawable/akwe_logo"
+                android:contentDescription="@string/company_logo" />
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/search_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:hint="@string/search_for_product"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/black"
+                android:visibility="gone"
+                app:queryBackground="@drawable/tint_white_background"
+                app:queryHint="search your product here....."
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/metrophobic"
+                android:layout_marginBottom="5dp"
                 android:contentDescription="@string/company_logo" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>

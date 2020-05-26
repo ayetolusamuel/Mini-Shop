@@ -17,9 +17,18 @@ import com.codingwithset.minie_commerce.data.ProductRepository
 class ProductViewModel(private val repository: ProductRepository) : ViewModel() {
 
 
+    private val filterTextAll: MutableLiveData<String> = MutableLiveData()
 
 
+    val teamAllList = Transformations.switchMap(filterTextAll) {
+        getAllProductForFilter(it)
+    }
 
+    //this function help to set the query enter to [filterTextAll]
+    //which is [MutableLiveData<String>] to observe if there is changes
+    fun setFilterName(name: String) {
+        filterTextAll.value = name
+    }
 
     /*
     this field handle the [ProductResult]
@@ -43,15 +52,16 @@ class ProductViewModel(private val repository: ProductRepository) : ViewModel() 
     }
 
 
-/*
-retrieve [ProductResult] and the result is pass to data field
-note that the result pass to data field declare in ProductResult = [LiveData<PagedList<Products>>]
+    /*
+    retrieve [ProductResult] and the result is pass to data field
+    note that the result pass to data field declare in ProductResult = [LiveData<PagedList<Products>>]
 
- */
+     */
     val productList: LiveData<PagedList<Products>> = Transformations.switchMap(productResult) {
         it.data
 
     }
+
     /*
     This handle the network error,incase if occur while PagedList.BoundaryCallBack trying to quering the webservice
     the value retrieve which is [LiveData<String>] is passed to [networkErrors]
@@ -69,7 +79,9 @@ note that the result pass to data field declare in ProductResult = [LiveData<Pag
     }
 
 
-
+    private fun getAllProductForFilter(name: String): LiveData<PagedList<Products>> {
+        return repository.getAllProductForFilter(name)
+    }
 
 
 }

@@ -2,9 +2,7 @@
 
 package com.codingwithset.minie_commerce.db
 
-import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
-import androidx.paging.PagedList
 import androidx.room.*
 import com.codingwithset.minie_commerce.model.Products
 
@@ -26,6 +24,11 @@ interface ProductDao {
 
     @Query("SELECT * FROM products")
     fun productsList(): List<Products>
+
+    @Query("SELECT * FROM products WHERE name LIKE :name ORDER BY  name ASC")
+    fun getAllProductForFilter(name: String): DataSource.Factory<Int,Products>
+
+
 
 
 
