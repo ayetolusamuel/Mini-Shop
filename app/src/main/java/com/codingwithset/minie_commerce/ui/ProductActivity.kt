@@ -191,6 +191,7 @@ class ProductActivity : AppCompatActivity() {
                     viewModel.teamAllList.observe(this@ProductActivity, Observer {
                         productAdapter.submitList(null)
                         productAdapter.submitList(it)
+
                         if (productAdapter.itemCount == 0) {
                             binding.relLayout.visible()
                             binding.checkProductNameTextView.text =
@@ -199,11 +200,11 @@ class ProductActivity : AppCompatActivity() {
                         } else {
                             binding.relLayout.gone()
                         }
-
-
                     })
-                } else {
+                }
+                else {
                     getProductList()
+                    binding.relLayout.gone()
                 }
 
                 return false
