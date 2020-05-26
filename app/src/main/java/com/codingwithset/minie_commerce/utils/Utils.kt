@@ -9,7 +9,6 @@ import android.net.Uri
 import android.os.Build
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContextCompat.getSystemService
 import com.codingwithset.minie_commerce.R
 
 
@@ -17,8 +16,8 @@ import com.codingwithset.minie_commerce.R
 this function [callSeller] call the merchant
  */
 fun View.callSeller() {
-    var phone: String = context.getString(R.string.seller_number_merchant)
-    var intent =
+    val phone: String = context.getString(R.string.seller_number_developer)
+    val intent =
         Intent(Intent.ACTION_DIAL, Uri.fromParts(context.getString(R.string.tel), phone, null))
     context.startActivity(intent)
 }
