@@ -130,10 +130,10 @@ class ProductActivity : AppCompatActivity() {
         viewModel.productList.observe(this, Observer {
             _productAdapter = ProductAdapter(this)
             showEmptyList(it.size == 0)
+
             productLists = it
             productAdapter.submitList(it)
             initRecyclerview()
-            binding.searchProduct.visible()
             initSearchView()
 
         })
@@ -154,11 +154,17 @@ class ProductActivity : AppCompatActivity() {
         if (show) {
             binding.emptyList.visible()
             binding.recyclerView.gone()
+
+            binding.searchProduct.gone()
             binding.loading.visible()
+            binding.call.gone()
         } else {
             binding.emptyList.gone()
             binding.recyclerView.visible()
+            binding.call.visible()
             binding.loading.gone()
+            binding.searchProduct.visible()
+
         }
     }
 

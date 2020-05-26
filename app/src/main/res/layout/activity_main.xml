@@ -59,6 +59,7 @@
                         android:layout_alignParentBottom="true"
                         android:layout_marginEnd="17dp"
                         android:layout_marginBottom="17dp"
+                        android:visibility="gone"
                         android:background="@drawable/ic_call_black_24dp"
                         android:foregroundGravity="bottom"
                         android:padding="@dimen/_16_value" />

@@ -10,6 +10,7 @@ import android.os.Build
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.codingwithset.minie_commerce.R
+import java.lang.Exception
 
 
 /*
@@ -39,40 +40,20 @@ fun View.gone() {
 }
 
 /**
- * Check whether network is available
- *
- * @param context
+ * Check whether network is available by ping ip/domain name
  * @return Whether device is connected to Network.
  */
-fun Context.checkInternetAccess(): Boolean {
+fun checkInternetAccess():Boolean{
     try {
-
-        with(getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                //Device is running on Marshmallow or later Android OS.
-                with(getNetworkCapabilities(activeNetwork)) {
-                    return hasTransport(NetworkCapabilities.TRANSPORT_WIFI) || hasTransport(
-                        NetworkCapabilities.TRANSPORT_CELLULAR
-                    )
-                }
-            } else {
-                @Suppress("DEPRECATION")
-                activeNetworkInfo?.let {
-                    // connected to the internet
-                    @Suppress("DEPRECATION")
-                    return listOf(
-                        ConnectivityManager.TYPE_WIFI,
-                        ConnectivityManager.TYPE_MOBILE
-                    ).contains(it.type)
-                }
-            }
-        }
-        return false
-    } catch (exc: NullPointerException) {
-        return false
+        val process: Process = Runtime.getRuntime().exec("ping -c 1 8.8.8.8")
+        val returnVal = process.waitFor()
+        return (returnVal == 0)
+    }catch (exception: Exception){
+        exception.printStackTrace()
     }
-}
+   return false
 
+}
 
 /*
 hide the keyboard
