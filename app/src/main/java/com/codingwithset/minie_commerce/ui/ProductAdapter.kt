@@ -20,7 +20,7 @@ import com.codingwithset.minie_commerce.model.Products
 
 
 class ProductAdapter(private val context: Context) :
-    PagedListAdapter<Products, ProductViewHolder>(DIFF_CALLBACK){
+    PagedListAdapter<Products, ProductViewHolder>(DIFF_CALLBACK) {
 
     //this handle the viewBinding to avoid findByView
     private var _binding: LayoutProductBinding? = null
@@ -85,9 +85,9 @@ class ProductAdapter(private val context: Context) :
             //if the product is outofstock the quantity should be 0
             //else display the quantity
             var quantity = product.stock_quantity.toString()
-           if (product.stock_status.equals(context.getString(R.string.outofstock))) {
+            if (product.stock_status.equals(context.getString(R.string.outofstock))) {
                 quantity = "0"
-               // holder.stockStatus.setTextColor(Color.parseColor("#ff9900"))
+                // holder.stockStatus.setTextColor(Color.parseColor("#ff9900"))
             }
             holder.quantity.text = "($quantity)"
 
@@ -104,9 +104,6 @@ class ProductAdapter(private val context: Context) :
         } catch (exception: NullPointerException) {
             Log.e("ProductAdapter", "description is null")
         }
-
-
-
 
 
     }

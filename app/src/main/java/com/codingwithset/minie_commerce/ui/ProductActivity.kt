@@ -43,8 +43,6 @@ class ProductActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-
-
         // get the view model
         viewModel = ViewModelProvider(this, Injection.provideViewModelFactory(this)).get(
             ProductViewModel::class.java
@@ -193,15 +191,14 @@ class ProductActivity : AppCompatActivity() {
                     viewModel.teamAllList.observe(this@ProductActivity, Observer {
                         productAdapter.submitList(null)
                         productAdapter.submitList(it)
-                        if (productAdapter.itemCount == 0){
+                        if (productAdapter.itemCount == 0) {
                             binding.relLayout.visible()
-                            binding.checkProductNameTextView.text = getString(R.string.error_message, query)
+                            binding.checkProductNameTextView.text =
+                                getString(R.string.error_message, query)
                             hideKeyboard()
-                        }else{
+                        } else {
                             binding.relLayout.gone()
                         }
-
-
 
 
                     })

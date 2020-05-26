@@ -74,6 +74,10 @@ fun Context.checkInternetAccess(): Boolean {
     }
 }
 
+
+/*
+hide the keyboard
+ */
 fun Activity.hideKeyboard() {
     val inputMethodManager: InputMethodManager? =
         getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
