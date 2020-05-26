@@ -38,7 +38,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
 
-
     //material design dependency
     implementation "com.google.android.material:material:$materialVersion"
 
@@ -49,7 +48,7 @@ dependencies {
     implementation "androidx.room:room-runtime:$roomVersion"
 
 
-   kapt "androidx.lifecycle:lifecycle-compiler:$archComponentsVersion"
+    kapt "androidx.lifecycle:lifecycle-compiler:$archComponentsVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
 
     // retrofit
