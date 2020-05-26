@@ -2,6 +2,7 @@ package com.codingwithset.minie_commerce.ui
 
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -188,13 +189,20 @@ class ProductActivity : AppCompatActivity() {
 
             override fun onQueryTextChange(query: String): Boolean {
                 if (query.trim().isNotEmpty()) {
-
                     viewModel.setFilterName("%${query}%")
-
 
                     viewModel.teamAllList.observe(this@ProductActivity, Observer {
                         productAdapter.submitList(null)
                         productAdapter.submitList(it)
+                        if (productAdapter.itemCount == 0){
+                            binding.relLayout.visible()
+                            binding.checkProductNameTextView.text = getString(R.string.error_message, query)
+                            hideKeyboard()
+                        }else{
+                            binding.relLayout.gone()
+                        }
+
+
 
 
                     })
@@ -207,6 +215,28 @@ class ProductActivity : AppCompatActivity() {
                 return false
             }
         })
+    }
+
+    private fun searchItemisEmptyView() {
+
+
+//        mProductAdapter.setProductFilterListener({ count ->
+//            if (count < 1) {
+//                getActivity().runOnUiThread(Runnable {
+//                    mSearchProductErrorName.setText(
+//                        getString(
+//                            R.string.error_message,
+//                            productSearch
+//                        )
+//                    )
+//                    mRelativeLayout.setVisibility(View.VISIBLE)
+//                })
+//            } else {
+//                getActivity().runOnUiThread(
+//                    Runnable { mRelativeLayout.setVisibility(View.GONE) }
+//                )
+//            }
+//        })
     }
 
 }
