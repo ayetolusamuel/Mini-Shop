@@ -39,21 +39,64 @@ fun View.gone() {
 
 }
 
+///**
+// * Check whether network is available by ping ip address/
+// * @return Whether device is connected to Network.
+// */
+//fun checkInternetAccess():Boolean{
+//    try {
+//        val process: Process = Runtime.getRuntime().exec("ping -c 1 8.8.8.8")
+//        val returnVal = process.waitFor()
+//        return (returnVal == 0)
+//    }catch (exception: Exception){
+//        exception.printStackTrace()
+//    }
+//   return false
+//
+//}
+
+
 /**
- * Check whether network is available by ping ip/domain name
+ * Check whether network is available
+ *
+ * @param context
  * @return Whether device is connected to Network.
  */
-fun checkInternetAccess():Boolean{
+fun Context.checkInternetAccess(): Boolean {
     try {
-        val process: Process = Runtime.getRuntime().exec("ping -c 1 8.8.8.8")
-        val returnVal = process.waitFor()
-        return (returnVal == 0)
-    }catch (exception: Exception){
-        exception.printStackTrace()
+
+        with(getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                //Device is running on Marshmallow or later Android OS.
+                with(getNetworkCapabilities(activeNetwork)) {
+                    return hasTransport(NetworkCapabilities.TRANSPORT_WIFI) || hasTransport(
+                        NetworkCapabilities.TRANSPORT_CELLULAR
+                    )
+                }
+            } else {
+                @Suppress("DEPRECATION")
+                activeNetworkInfo?.let {
+                    // connected to the internet
+                    @Suppress("DEPRECATION")
+                    return listOf(
+                        ConnectivityManager.TYPE_WIFI,
+                        ConnectivityManager.TYPE_MOBILE
+                    ).contains(it.type)
+                }
+            }
+        }
+        return false
+    } catch (exc: NullPointerException) {
+        return false
     }
-   return false
+
+
 
 }
+
+
+
+
 
 /*
 hide the keyboard
@@ -63,6 +106,4 @@ fun Activity.hideKeyboard() {
         getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
     inputMethodManager?.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
 }
-
-
 
