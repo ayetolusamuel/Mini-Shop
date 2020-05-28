@@ -5,6 +5,7 @@
 
 * The concept of the project is to explain how to use paging library for both remote & local datasource, and you will be able to perform searchview action 
 
+* click [here](https://docs.woocommerce.com/document/woocommerce-rest-api/) to generate your Api Key (customer_key & customer_secret) for your ecommerce website.
 
 # The Restful Api Used:
 -------------------------
@@ -14,6 +15,11 @@
 * Woocommerce Restful Api base url for product
 ##### https://example.com/wp-json/wc/v3/products
 ###### Replace example.com with your domain name
+------------------------------------------------
+* Complete Restful Api path
+###### https://example/wp-json/wc/v3/products?per_page=50&consumer_key=ck_7ae18a838d4eef3321447c5fdfd88c96020d0f48&consumer_secret=cs_bed4f32d44a97c8bb6e7d23fb3a00b1c762e1969
+####### Replace the customer key and customer secret with the one you generated from the above link.
+--------------------------------------------------
 
 ## for this project the customer keys & customer secret we will be using details:
 
@@ -21,7 +27,7 @@
 
 ### customer_secret = cs_bed4f32d44a97c8bb6e7d23fb3a00b1c762e1969
 
-* click [here](https://docs.woocommerce.com/document/woocommerce-rest-api/) to generate your Api Key (customer_key & customer_secret) for your ecommerce website.
+
 
 * for code structure video demo click [here](https://youtu.be/2ZdmpKbACF8)
 
