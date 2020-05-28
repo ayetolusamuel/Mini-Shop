@@ -11,7 +11,7 @@
 -------------------------
 * click [here](https://www.akwe.com.ng/wp-json/wc/v3/products?per_page=50&consumer_key=ck_7ae18a838d4eef3321447c5fdfd88c96020d0f48&consumer_secret=cs_bed4f32d44a97c8bb6e7d23fb3a00b1c762e1969) for Restful API response used, you can test this on your postman.
 
-### If you're trying to consume woocommerce Restful Api of your Site(Ecoomerce develop with wordpress), follow the below guidelines:
+### If you're trying to consume woocommerce Restful Api of your Site(Ecommerce develop with wordpress), follow the below guidelines:
 * Woocommerce Restful Api base url for product
 ##### https://example.com/wp-json/wc/v3/products
 ###### Replace example.com with your domain name
@@ -27,13 +27,14 @@
 
 ### customer_secret = cs_bed4f32d44a97c8bb6e7d23fb3a00b1c762e1969
 
-
+###### Click [here](https://woocommerce.github.io/woocommerce-rest-api-docs/?shell#products) for Woocommerce Resful Api documentation for products
 
 * for code structure video demo click [here](https://youtu.be/2ZdmpKbACF8)
 
+
 # App Demo
 ------------
-![](https://github.com/ayetolusamuel/Mini-Shop/blob/master/images/app-demooo.gif){:height="700px" width="400px"}
+![](https://github.com/ayetolusamuel/Mini-Shop/blob/master/images/app-demooo.gif)
 
 
 # Features
