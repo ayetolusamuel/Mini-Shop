@@ -1,5 +1,4 @@
-# Mini-Shop
-#This project is based on paging codelabs. 
+# This project is based on paging codelabs. 
 
 * The project consume Woocommerce Restful Api of any website develop with wordpress using woocommerce plugin.
 
