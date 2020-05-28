@@ -33,7 +33,7 @@
 
 # App Demo
 ------------
-![](https://github.com/ayetolusamuel/Mini-Shop/blob/master/images/app-demooo.gif | width=250)
+![](https://github.com/ayetolusamuel/Mini-Shop/blob/master/images/app-demooo.gif){:height="700px" width="400px"}
 
 
 # Features
