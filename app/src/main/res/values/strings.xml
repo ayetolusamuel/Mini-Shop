@@ -12,6 +12,7 @@
     <string name="error_message"> For %1$s</string>
     <string name="search_for_product">search for product</string>
     <string name="company_logo">company logo</string>
+    <string name="no_review">(No reviews yet)</string>
 
 
 </resources>

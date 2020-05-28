@@ -58,8 +58,9 @@
             android:layout_toRightOf="@id/product_rating"
             android:layout_below="@id/name"
             android:text="(10)"
+            android:singleLine="true"
             android:layout_marginLeft="3dp"
-            android:textColor="@android:color/black"
+            android:textColor="@color/darkGrey"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

@@ -97,8 +97,15 @@ class ProductAdapter(private val context: Context) :
 
             holder.stockStatus.text = product.stock_status
             holder.rating.rating = product.average_rating!!.toFloat()
+            println("rating ${product.rating_count}")
+            if (product.rating_count==0){
+                holder.ratingCount.text = context.getString(R.string.no_review)
+            }else{
+                holder.ratingCount.text = "(${product.rating_count.toString()})"
+            }
 
-            holder.ratingCount.text = "(${product.rating_count.toString()})"
+
+
 
 
         } catch (exception: NullPointerException) {

@@ -71,6 +71,7 @@ class ProductActivity : AppCompatActivity() {
          */
 
         binding.swipeRefresh.setOnRefreshListener {
+            binding.relLayout.gone()
             binding.swipeRefresh.isRefreshing = false
             if (checkInternetAccess()) {
                 refresh()
