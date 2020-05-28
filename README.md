@@ -1,8 +1,16 @@
-# This project is based on paging codelabs. 
+# This project is based on paging codelabs and follow MVVM Architecture. 
 
 * The project consume Woocommerce Restful Api of any website develop with wordpress using woocommerce plugin.
 
 * The concept of the project is to explain how to use paging library for both remote & local datasource, and you will be able to perform searchview action 
+
+#Libraries
+##### Room
+##### Paging
+##### Steho
+##### CurrencySign
+##### Retrofit etc.
+
 
 # The Restful Api Used:
 * click [here](https://docs.woocommerce.com/document/woocommerce-rest-api/) to generate your Api Key (customer_key & customer_secret) for your ecommerce website.
