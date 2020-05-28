@@ -10,11 +10,10 @@
 -------------------------
 * click [here](https://www.akwe.com.ng/wp-json/wc/v3/products?per_page=50&consumer_key=ck_7ae18a838d4eef3321447c5fdfd88c96020d0f48&consumer_secret=cs_bed4f32d44a97c8bb6e7d23fb3a00b1c762e1969) for Restful API response used, you can test this on your postman.
 
-## If you're trying to consume woocommerce Restful Api of your Site(Ecoomerce develop with wordpress), follow the below guidelines:
-
+### If you're trying to consume woocommerce Restful Api of your Site(Ecoomerce develop with wordpress), follow the below guidelines:
 * Woocommerce Restful Api base url for product
-#### https://example.com/wp-json/wc/v3/products
-### Replace example.com with your domain name
+##### https://example.com/wp-json/wc/v3/products
+###### Replace example.com with your domain name
 
 ## for this project the customer keys & customer secret we will be using details:
 
