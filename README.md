@@ -8,15 +8,19 @@
 
 # The Restful Api Used:
 -------------------------
-* click [here](https://www.akwe.com.ng/wp-json/wc/v3/products?per_page=50&consumer_key=ck_7ae18a838d4eef3321447c5fdfd88c96020d0f48&consumer_secret=cs_bed4f32d44a97c8bb6e7d23fb3a00b1c762e1969) for Restful response used, you can test this on your postman.
+* click [here](https://www.akwe.com.ng/wp-json/wc/v3/products?per_page=50&consumer_key=ck_7ae18a838d4eef3321447c5fdfd88c96020d0f48&consumer_secret=cs_bed4f32d44a97c8bb6e7d23fb3a00b1c762e1969) for Restful API response used, you can test this on your postman.
 
-## If you're 
+## If you're trying to consume woocommerce Restful Api of your Site(Ecoomerce develop with wordpress), follow the below guidelines:
 
-* for this project the customer keys & customer secret we will be using details:
+* Woocommerce Restful Api base url for product
+#### https://example.com/wp-json/wc/v3/products
+### Replace example.com with your domain name
 
-###customer_key = ck_7ae18a838d4eef3321447c5fdfd88c96020d0f48
+## for this project the customer keys & customer secret we will be using details:
 
-###customer_secret = cs_bed4f32d44a97c8bb6e7d23fb3a00b1c762e1969
+ customer_key = ck_7ae18a838d4eef3321447c5fdfd88c96020d0f48
+
+### customer_secret = cs_bed4f32d44a97c8bb6e7d23fb3a00b1c762e1969
 
 * click [here](https://docs.woocommerce.com/document/woocommerce-rest-api/) to generate your Api Key (customer_key & customer_secret) for your ecommerce website.
 
