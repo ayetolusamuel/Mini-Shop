@@ -10,7 +10,6 @@ import android.os.Build
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.codingwithset.minie_commerce.R
-import java.lang.Exception
 
 
 /*

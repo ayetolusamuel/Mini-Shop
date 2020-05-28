@@ -15,6 +15,7 @@ import com.codingwithset.minie_commerce.R
 import com.codingwithset.minie_commerce.databinding.ActivityMainBinding
 import com.codingwithset.minie_commerce.model.Products
 import com.codingwithset.minie_commerce.utils.*
+import java.lang.Exception
 
 
 class ProductActivity : AppCompatActivity() {
@@ -211,7 +212,12 @@ class ProductActivity : AppCompatActivity() {
                             binding.relLayout.visible()
                             binding.checkProductNameTextView.text =
                                 getString(R.string.error_message, query)
-                            hideKeyboard()
+                            try {
+                                hideKeyboard()
+                            }catch (exc: Exception){
+                                exc.printStackTrace()
+                            }
+
                         } else {
                           binding.relLayout.gone()
                         }
