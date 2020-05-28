@@ -17,7 +17,7 @@
 
 # App Demo
 ------------
-[](https://github.com/ayetolusamuel/Mini-Shop/blob/master/images/app-demooo.gif)
+![](https://github.com/ayetolusamuel/Mini-Shop/blob/master/images/app-demooo.gif)
 
 
 # Features
