@@ -27,7 +27,7 @@
 ###### Replace the customer key and customer secret with the one you generated from the above link.
 --------------------------------------------------
 
-### For this project the customer keys & customer secret we will be using details:
+### For this project the customer keys & customer secret:
 
 ###### customer_key = ck_7ae18a838d4eef3321447c5fdfd88c96020d0f48
 ###### customer_secret = cs_bed4f32d44a97c8bb6e7d23fb3a00b1c762e1969
