@@ -15,6 +15,7 @@ import com.codingwithset.minie_commerce.R
 import com.codingwithset.minie_commerce.databinding.ActivityMainBinding
 import com.codingwithset.minie_commerce.model.Products
 import com.codingwithset.minie_commerce.utils.*
+import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.Exception
 
 
@@ -52,11 +53,11 @@ class ProductActivity : AppCompatActivity() {
 
         //add dividers between RecyclerView's row items
         val decoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
-        binding.recyclerView.addItemDecoration(decoration)
+        recyclerView.addItemDecoration(decoration)
 
 
         //if the call icon is click [callSeller] is called.
-        binding.call.setOnClickListener {
+        call.setOnClickListener {
             it.callSeller()
         }
 
@@ -70,15 +71,13 @@ class ProductActivity : AppCompatActivity() {
        else loading view visibility is set to gone & swipeRefreshing is set to false, so that the swipeRefresh dialog will be visible
          */
 
-        binding.swipeRefresh.setOnRefreshListener {
-            binding.relLayout.gone()
-            binding.swipeRefresh.isRefreshing = false
+        swipeRefresh.setOnRefreshListener {
             if (checkInternetAccess()) {
                 refresh()
 
             } else {
-                binding.loading.gone()
-                binding.swipeRefresh.isRefreshing = false
+                loading.gone()
+                swipeRefresh.isRefreshing = false
             }
 
 
@@ -89,14 +88,14 @@ class ProductActivity : AppCompatActivity() {
     if there is internet access [refresh] function,
     else loading view visibility is set to gone & swipeRefreshing is set to false, so that the swipeRefresh dialog will be visible
       */
-        binding.retry.setOnClickListener {
+        retry.setOnClickListener {
             if (checkInternetAccess()) {
-                binding.retry.gone()
+                retry.gone()
                 refresh()
 
             } else {
-                binding.loading.gone()
-                binding.retry.visible()
+                loading.gone()
+                retry.visible()
             }
 
         }
@@ -106,15 +105,14 @@ class ProductActivity : AppCompatActivity() {
         network error from [ProductResult]
          */
         viewModel.networkErrors.observe(this, Observer {
-            println("whoops $it")
             Toast.makeText(this, "Wooops $it", Toast.LENGTH_SHORT).show()
-            binding.retry.visible()
-            binding.emptyList.text = getString(R.string.check_internet)
-            binding.loading.gone()
+            retry.visible()
+            emptyList.text = getString(R.string.check_internet)
+            loading.gone()
 
             //the retry visibility should be set to gone in as much the product list is not empty
             if (productLists!!.isNotEmpty())
-                binding.retry.gone()
+                retry.gone()
 
         })
 
@@ -154,16 +152,16 @@ class ProductActivity : AppCompatActivity() {
      */
     private fun showEmptyList(show: Boolean) {
         if (show) {
-            binding.emptyList.visible()
-            binding.recyclerView.gone()
+            emptyList.visible()
+            recyclerView.gone()
+            loading.visible()
+            call.gone()
             binding.searchProduct.gone()
-            binding.loading.visible()
-            binding.call.gone()
         } else {
-            binding.emptyList.gone()
-            binding.recyclerView.visible()
-            binding.call.visible()
-            binding.loading.gone()
+            emptyList.gone()
+            recyclerView.visible()
+            call.visible()
+            loading.gone()
             binding.searchProduct.visible()
 
         }
@@ -172,12 +170,13 @@ class ProductActivity : AppCompatActivity() {
     private fun refresh() {
         viewModel.networkStates.loadToRefresh().observe(this, Observer {
             if (it.status == NetworkState.LOADING.status) {
-                binding.emptyList.text = getString(R.string.retrieve_data)
-                binding.loading.visible()
+                relLayout.gone()
+                emptyList.text = getString(R.string.retrieve_data)
+                loading.visible()
 
             }
             if (it.status == NetworkState.LOADED.status) {
-                binding.swipeRefresh.isRefreshing = false
+                swipeRefresh.isRefreshing = false
             }
         })
     }
@@ -199,6 +198,8 @@ class ProductActivity : AppCompatActivity() {
              */
             override fun onQueryTextChange(query: String): Boolean {
                 if (query.trim().isNotEmpty()) {
+                    swipeRefresh.isRefreshing = false
+                    relLayout.gone()
 
                     // appending '%' so we can allow other characters to be before and after the query string
                     viewModel.setFilterName("%${query}%")
@@ -210,23 +211,23 @@ class ProductActivity : AppCompatActivity() {
                         //if product is not find base on the search keyword the [binding.relLayout] is visible
                         //hide keyboard
                         if (productAdapter.itemCount == 0) {
-                            binding.relLayout.visible()
-                            binding.checkProductNameTextView.text =
+                            relLayout.gone()
+                            please_try_again.text =
                                 getString(R.string.error_message, query)
                             try {
                                 hideKeyboard()
-                            }catch (exc: Exception){
+                            } catch (exc: Exception) {
                                 exc.printStackTrace()
                             }
 
                         } else {
-                          binding.relLayout.gone()
+                            swipeRefresh.isRefreshing
+                            relLayout.gone()
                         }
                     })
-                }
-                else {
+                } else {
                     getProductList()
-                    binding.relLayout.gone()
+                    relLayout.gone()
                 }
 
                 return false

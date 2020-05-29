@@ -11,7 +11,6 @@ import com.codingwithset.minie_commerce.model.Products
 
 
 class ProductBoundaryCallback(
-
     private val service: ProductService,
     private val cache: ProductLocalCache
 ) : PagedList.BoundaryCallback<Products>() {

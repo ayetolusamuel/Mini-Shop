@@ -82,6 +82,4 @@ class ProductViewModel(private val repository: ProductRepository) : ViewModel() 
     private fun getAllProductForFilter(name: String): LiveData<PagedList<Products>> {
         return repository.getAllProductForFilter(name)
     }
-
-
 }
