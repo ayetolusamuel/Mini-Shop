@@ -211,7 +211,11 @@ class ProductActivity : AppCompatActivity() {
                         //if product is not find base on the search keyword the [binding.relLayout] is visible
                         //hide keyboard
                         if (productAdapter.itemCount == 0) {
-                            relLayout.gone()
+
+                            if (query.length>= 0){
+                                relLayout.gone()
+                            }
+
                             please_try_again.text =
                                 getString(R.string.error_message, query)
                             try {
@@ -221,7 +225,7 @@ class ProductActivity : AppCompatActivity() {
                             }
 
                         } else {
-                            swipeRefresh.isRefreshing
+                            swipeRefresh.isRefreshing = false
                             relLayout.gone()
                         }
                     })
