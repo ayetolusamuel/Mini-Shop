@@ -7,6 +7,7 @@
 # Libraries
 ##### Room
 ##### Paging
+##### Glide
 ##### Steho
 ##### CurrencySign
 ##### Retrofit etc.
