@@ -4,11 +4,13 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.text.Html
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.text.HtmlCompat
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -36,7 +38,7 @@ class ProductAdapter(private val context: Context) :
         return ProductViewHolder(binding)
     }
 
-    @SuppressLint("NewApi")
+
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
 
         val product = getItem(position)
@@ -55,7 +57,18 @@ class ProductAdapter(private val context: Context) :
 
             //convert the product description to String, reason
             //description retrieve from webservice is in html format.
-            description = Html.fromHtml(description, Html.FROM_HTML_MODE_LEGACY).toString()
+            //and support backward version of android
+
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                description = Html.fromHtml(description, Html.FROM_HTML_MODE_LEGACY).toString()
+
+            } else {
+                description = HtmlCompat.fromHtml(description!!, HtmlCompat.FROM_HTML_MODE_LEGACY).toString()
+
+            }
+
+
             holder.shortDescription.text = description
 
 
@@ -108,7 +121,7 @@ class ProductAdapter(private val context: Context) :
 
 
         } catch (exception: NullPointerException) {
-            Log.e("ProductAdapter", "description is null")
+            Log.e("ProductAdapter", "product is null")
         }
 
 

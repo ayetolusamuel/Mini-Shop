@@ -3,12 +3,16 @@ package com.codingwithset.minie_commerce.utils
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
 import android.os.Build
+import android.os.Message
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import com.codingwithset.minie_commerce.R
 
 
@@ -90,12 +94,26 @@ fun Context.checkInternetAccess(): Boolean {
     }
 
 
-
 }
 
+fun Context.message(message: String) {
+    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+}
+
+fun Context.chatSeller() {
+    try {
+        val browserIntent = Intent(
+            Intent.ACTION_VIEW,
+            Uri.parse(this.getString(R.string.seller_whatsap_link))
+        )
+        this.startActivity(browserIntent)
+    } catch (exception: PackageManager.NameNotFoundException) {
+        Log.e("Utils", exception.toString())
+        message("Whastsapp is not install on your phone")
+    }
 
 
-
+}
 
 /*
 hide the keyboard

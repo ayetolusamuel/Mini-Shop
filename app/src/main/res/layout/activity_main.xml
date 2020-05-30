@@ -62,6 +62,18 @@
                         android:background="@drawable/ic_call_black_24dp"
                         android:foregroundGravity="bottom"
                         android:padding="@dimen/_16_value" />
+
+                    <TextView
+                        android:id="@+id/chat"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_toLeftOf="@id/call"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="17dp"
+                        android:visibility="gone"
+                        android:background="@drawable/ic_chat_black_24dp"
+                        android:layout_marginTop="@dimen/_16_value"
+                        android:padding="@dimen/_16_value" />
                 </RelativeLayout>
 
             </androidx.appcompat.widget.Toolbar>

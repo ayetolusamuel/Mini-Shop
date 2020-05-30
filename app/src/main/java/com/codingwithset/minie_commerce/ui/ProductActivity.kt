@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.codingwithset.minie_commerce.Injection
 import com.codingwithset.minie_commerce.R
 import com.codingwithset.minie_commerce.databinding.ActivityMainBinding
@@ -61,6 +62,18 @@ class ProductActivity : AppCompatActivity() {
             it.callSeller()
         }
 
+
+        chat.setOnClickListener {
+            if (checkInternetAccess()){
+                chatSeller()
+            }else{
+                message("Check internet connection!!!")
+            }
+
+        }
+
+
+
         //function that handle retrieval of products list
         getProductList()
 
@@ -78,6 +91,7 @@ class ProductActivity : AppCompatActivity() {
             } else {
                 loading.gone()
                 swipeRefresh.isRefreshing = false
+                message("Check internet connection!!!")
             }
 
 
@@ -140,7 +154,7 @@ class ProductActivity : AppCompatActivity() {
     }
 
     private fun initRecyclerview() {
-        binding.recyclerView.apply {
+        recyclerView.apply {
             adapter = productAdapter
             layoutManager = LinearLayoutManager(context)
         }
@@ -156,11 +170,13 @@ class ProductActivity : AppCompatActivity() {
             recyclerView.gone()
             loading.visible()
             call.gone()
+            chat.gone()
             binding.searchProduct.gone()
         } else {
             emptyList.gone()
             recyclerView.visible()
             call.visible()
+            chat.visible()
             loading.gone()
             binding.searchProduct.visible()
 
@@ -180,6 +196,10 @@ class ProductActivity : AppCompatActivity() {
             }
         })
     }
+
+
+
+
 
     private fun initSearchView() {
 
@@ -212,9 +232,14 @@ class ProductActivity : AppCompatActivity() {
                         //hide keyboard
                         if (productAdapter.itemCount == 0) {
 
+
                             if (query.length>= 0){
                                 relLayout.gone()
+                                swipeRefresh.setOnRefreshListener { swipeRefresh.isRefreshing = false }
                             }
+                            relLayout.visible()
+                            call.gone()
+                            chat.gone()
 
                             please_try_again.text =
                                 getString(R.string.error_message, query)
@@ -227,6 +252,8 @@ class ProductActivity : AppCompatActivity() {
                         } else {
                             swipeRefresh.isRefreshing = false
                             relLayout.gone()
+                            call.visible()
+                            chat.visible()
                         }
                     })
                 } else {

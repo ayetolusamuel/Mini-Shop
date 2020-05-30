@@ -25,7 +25,8 @@ android {
     }
 
     //this enable viewBinding features, to avoid unnecessary findViewById
-    viewBinding.enabled = true
+    //viewBinding.enabled = true
+    android.buildFeatures.viewBinding = true
 
 }
 
