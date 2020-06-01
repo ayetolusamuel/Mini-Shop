@@ -1,6 +1,6 @@
 # This project is based on paging codelabs and follow MVVM Architecture.
 
-* The project use viewBinding which was supported in Android Studio 3.6+
+* The project requires Android Studio 3.6+ 
 
 * The project consume Woocommerce Restful API of any website develop with wordpress using woocommerce plugin.
 
