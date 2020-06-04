@@ -10,14 +10,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.codingwithset.minie_commerce.Injection
 import com.codingwithset.minie_commerce.R
 import com.codingwithset.minie_commerce.databinding.ActivityMainBinding
 import com.codingwithset.minie_commerce.model.Products
 import com.codingwithset.minie_commerce.utils.*
 import kotlinx.android.synthetic.main.activity_main.*
-import java.lang.Exception
 
 
 class ProductActivity : AppCompatActivity() {
@@ -64,38 +62,18 @@ class ProductActivity : AppCompatActivity() {
 
 
         chat.setOnClickListener {
-            if (checkInternetAccess()){
+            if (checkInternetAccess()) {
                 chatSeller()
-            }else{
+            } else {
                 message("Check internet connection!!!")
             }
 
         }
-
 
 
         //function that handle retrieval of products list
         getProductList()
 
-
-        /*
-        action perform if swipeRefresh happen,
-       if there is internet access [refresh] function,
-       else loading view visibility is set to gone & swipeRefreshing is set to false, so that the swipeRefresh dialog will be visible
-         */
-
-        swipeRefresh.setOnRefreshListener {
-            if (checkInternetAccess()) {
-                refresh()
-
-            } else {
-                loading.gone()
-                swipeRefresh.isRefreshing = false
-                message("Check internet connection!!!")
-            }
-
-
-        }
 
         /*
      action perform if retry is clicked,
@@ -130,8 +108,50 @@ class ProductActivity : AppCompatActivity() {
 
         })
 
+        //function that handle swipe refresh
+        swipeAction()
+
+
+        /**
+         * this listener handle the searchview to know if focused or not
+         * if focused nothing swipe refresh should set to false
+         * else call [swipeAction] function
+         */
+        search_product.setOnQueryTextFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                swipeRefresh.setOnRefreshListener {
+                    swipeRefresh.isRefreshing = false
+                }
+            } else {
+                swipeAction()
+
+
+            }
+        }
 
         binding.root
+    }
+
+    /**the [relLayout] is set to gone before swipe refresh is performed
+     * if there is internet access the [refresh] function is called.
+     * else loading is gone,swipe refreshing is set to false
+     * toast is display to user
+     */
+    private fun swipeAction() {
+        relLayout.gone()
+        retry.gone()
+        swipeRefresh.setOnRefreshListener {
+            if (checkInternetAccess()) {
+                refresh()
+
+            } else {
+                loading.gone()
+                swipeRefresh.isRefreshing = false
+                message("Check internet connection!!!")
+            }
+
+
+        }
     }
 
     /*
@@ -198,9 +218,6 @@ class ProductActivity : AppCompatActivity() {
     }
 
 
-
-
-
     private fun initSearchView() {
 
         binding.searchProduct.setOnQueryTextListener(object :
@@ -231,12 +248,14 @@ class ProductActivity : AppCompatActivity() {
                         //if product is not find base on the search keyword the [binding.relLayout] is visible
                         //hide keyboard
                         if (productAdapter.itemCount == 0) {
+//
+//
+//                        if (query.length >= 0) {
+//                            relLayout.gone()
+//                            swipeRefresh.setOnRefreshListener { swipeRefresh.isRefreshing = false }
+//                        }
+//                        swipeRefresh.setOnRefreshListener { swipeRefresh.isRefreshing = false }
 
-
-                            if (query.length>= 0){
-                                relLayout.gone()
-                                swipeRefresh.setOnRefreshListener { swipeRefresh.isRefreshing = false }
-                            }
                             relLayout.visible()
                             call.gone()
                             chat.gone()
@@ -250,7 +269,6 @@ class ProductActivity : AppCompatActivity() {
                             }
 
                         } else {
-                            swipeRefresh.isRefreshing = false
                             relLayout.gone()
                             call.visible()
                             chat.visible()
