@@ -1,8 +1,11 @@
-# This project is based on paging codelabs and follow MVVM Architecture. 
+# This project is based on paging codelabs and follow MVVM Architecture.
+
+* The project requires Android Studio 3.6+ 
 
 * The project consume Woocommerce Restful API of any website develop with wordpress using woocommerce plugin.
 
 * The concept of the project is to explain how to use paging library for both remote & local datasource, and you will be able to perform search action on product list.
+
 
 # Libraries
 ##### Room
@@ -23,6 +26,7 @@
 ##### https://example.com/wp-json/wc/v3/products
 ###### Replace example.com with your domain name
 ------------------------------------------------
+
 * Complete Restful Api path
 ##### https://example/wp-json/wc/v3/products?per_page=50&consumer_key=ck_7ae18a838d4eef3321447c5fdfd88c96020d0f48&consumer_secret=cs_bed4f32d44a97c8bb6e7d23fb3a00b1c762e1969
 ###### Replace the customer key and customer secret with the one you generated from the above link.And dont forget to replace example.com with your domain name.
