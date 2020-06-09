@@ -9,7 +9,6 @@
     <string name="network_error">Error in fetching products...\nPlease check internet connection</string>
     <string name="tel">tel</string>
     <string name="check_internet">Please check your internet connection. \n    swipe or click retry!!!</string>
-    <string name="product_list">Product list</string>
     <string name="outofstock">outofstock</string>
     <string name="error_message"> For %1$s</string>
     <string name="search_for_product">search for product</string>

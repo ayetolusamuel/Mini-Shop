@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.paging.PagedList
@@ -129,6 +130,7 @@ class ProductActivity : AppCompatActivity() {
             }
         }
 
+
         binding.root
     }
 
@@ -247,14 +249,13 @@ class ProductActivity : AppCompatActivity() {
 
                         //if product is not find base on the search keyword the [binding.relLayout] is visible
                         //hide keyboard
+
                         if (productAdapter.itemCount == 0) {
-//
-//
-//                        if (query.length >= 0) {
-//                            relLayout.gone()
-//                            swipeRefresh.setOnRefreshListener { swipeRefresh.isRefreshing = false }
-//                        }
-//                        swipeRefresh.setOnRefreshListener { swipeRefresh.isRefreshing = false }
+
+                            //if the loading is visible the search error view should be gone
+                            if (loading.isVisible){
+                                relLayout.gone()
+                            }
 
                             relLayout.visible()
                             call.gone()
@@ -284,5 +285,10 @@ class ProductActivity : AppCompatActivity() {
         })
     }
 
+
+    override fun onResume() {
+        super.onResume()
+        swipeAction()
+    }
 
 }

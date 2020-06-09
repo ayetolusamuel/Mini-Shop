@@ -42,7 +42,7 @@
                         android:fontFamily="@font/metrophobic"
                         android:gravity="center"
                         android:padding="8dp"
-                        android:text="@string/product_list"
+                        android:text="@string/app_name"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@android:color/black"
                         android:textColorHint="@android:color/white"
