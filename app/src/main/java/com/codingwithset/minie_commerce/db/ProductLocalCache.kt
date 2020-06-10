@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import com.codingwithset.minie_commerce.model.Products
 import java.util.concurrent.Executor
+import javax.inject.Inject
 
 /**
  * Class that handles the DAO local data source. This ensures that methods are triggered on the

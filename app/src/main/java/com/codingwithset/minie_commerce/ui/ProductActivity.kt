@@ -200,6 +200,7 @@ class ProductActivity : AppCompatActivity() {
             call.visible()
             chat.visible()
             loading.gone()
+            relLayout.gone()
             binding.searchProduct.visible()
 
         }

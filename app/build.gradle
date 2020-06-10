@@ -24,11 +24,6 @@ android {
         }
     }
 
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
     // For Kotlin projects
     kotlinOptions {
         jvmTarget = "1.8"
@@ -43,48 +38,74 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+
+    def appCompatVersion = '1.1.0'
+    implementation "androidx.appcompat:appcompat:$appCompatVersion"
+
+    implementation 'androidx.core:core-ktx:1.3.0'
+
+    def constraintLayoutVersion = '1.1.3'
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
     testImplementation 'junit:junit:4.12'
 
 
     //material design dependency
+    def  materialVersion = '1.1.0'
     implementation "com.google.android.material:material:$materialVersion"
+
+    //swipeRefresh lib
+    def swipeRefreshVersion= '1.0.0'
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swipeRefreshVersion"
 
 
     // architecture components
     implementation "androidx.lifecycle:lifecycle-extensions:$archComponentsVersion"
     implementation "androidx.lifecycle:lifecycle-runtime:$archComponentsVersion"
-    implementation "androidx.room:room-runtime:$roomVersion"
-
-
     kapt "androidx.lifecycle:lifecycle-compiler:$archComponentsVersion"
+
+
+    def roomVersion = '2.2.5'
+    implementation "androidx.room:room-runtime:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
 
-    // retrofit
+
+
+
+    // retrofit & okHttpLoggingInterceptor dependencies
+    def retrofitVersion = "2.6.0"
+    def okhttpLoggingInterceptorVersion = "4.0.0"
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     implementation "com.squareup.retrofit2:retrofit-mock:$retrofitVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttpLoggingInterceptorVersion"
 
     //glide
+    def  glideVersion = "4.10.0"
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
 
 
     //currency sign library
+    def currencySignVersion = "1.0.3"
     implementation "com.github.ayetolusamuel:CurrencySignExample:$currencySignVersion"
 
     //stetho dependencies
+    def  stethoVersion = "1.5.0"
     implementation "com.facebook.stetho:stetho:$stethoVersion"
 
     //paging dependencies
+    def pagingVersion = '2.1.0-alpha01'
+    def pagingRuntimeVersion = '2.1.2'
     implementation "androidx.paging:paging-runtime:$pagingVersion"
     implementation "androidx.paging:paging-runtime-ktx:$pagingRuntimeVersion"
 
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // dagger dependencies
+    def dagger_version = "2.27"
+    implementation "com.google.dagger:dagger:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
 
 }

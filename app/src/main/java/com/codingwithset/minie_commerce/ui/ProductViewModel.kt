@@ -8,13 +8,14 @@ import androidx.paging.PagedList
 import com.codingwithset.minie_commerce.model.ProductResult
 import com.codingwithset.minie_commerce.model.Products
 import com.codingwithset.minie_commerce.data.ProductRepository
+import javax.inject.Inject
 
 
 /**
  * ViewModel for the [ProductActivity] screen.
  * The [ProductViewModel] class communicate with the [ProductRepository] to get the data.
  */
-class ProductViewModel(private val repository: ProductRepository) : ViewModel() {
+class ProductViewModel  @Inject constructor(private val repository: ProductRepository) : ViewModel() {
 
 
     private val filterTextAll: MutableLiveData<String> = MutableLiveData()

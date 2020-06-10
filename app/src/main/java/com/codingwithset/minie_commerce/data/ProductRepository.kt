@@ -7,6 +7,7 @@ import com.codingwithset.minie_commerce.api.ProductService
 import com.codingwithset.minie_commerce.db.ProductLocalCache
 import com.codingwithset.minie_commerce.model.ProductResult
 import com.codingwithset.minie_commerce.model.Products
+import javax.inject.Inject
 
 
 /**
