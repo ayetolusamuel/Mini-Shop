@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.paging.PagedList
@@ -24,6 +25,7 @@ class ProductActivity : AppCompatActivity() {
     //this handle the viewBinding to avoid findByView
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
+    val searchState = MutableLiveData<Boolean>()
 
 
     //keep track of products list
@@ -49,6 +51,9 @@ class ProductActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, Injection.provideViewModelFactory(this)).get(
             ProductViewModel::class.java
         )
+
+
+        //  getProductForSearchView()
 
 
         //add dividers between RecyclerView's row items
@@ -102,6 +107,7 @@ class ProductActivity : AppCompatActivity() {
             retry.visible()
             emptyList.text = getString(R.string.check_internet)
             loading.gone()
+            swipeRefresh.isRefreshing = false
 
             //the retry visibility should be set to gone in as much the product list is not empty
             if (productLists!!.isNotEmpty())
@@ -120,12 +126,13 @@ class ProductActivity : AppCompatActivity() {
          */
         search_product.setOnQueryTextFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
+                searchState.value = true
                 swipeRefresh.setOnRefreshListener {
                     swipeRefresh.isRefreshing = false
                 }
             } else {
                 swipeAction()
-
+                searchState.value = false
 
             }
         }
@@ -140,8 +147,7 @@ class ProductActivity : AppCompatActivity() {
      * toast is display to user
      */
     private fun swipeAction() {
-        relLayout.gone()
-        retry.gone()
+
         swipeRefresh.setOnRefreshListener {
             if (checkInternetAccess()) {
                 refresh()
@@ -163,6 +169,8 @@ class ProductActivity : AppCompatActivity() {
        searchview should also visible the product list is not empty
         */
     private fun getProductList() {
+
+
         viewModel.productList.observe(this, Observer {
             _productAdapter = ProductAdapter(this)
             showEmptyList(it.size == 0)
@@ -207,16 +215,18 @@ class ProductActivity : AppCompatActivity() {
     }
 
     private fun refresh() {
-        viewModel.networkStates.loadToRefresh().observe(this, Observer {
-            if (it.status == NetworkState.LOADING.status) {
-                relLayout.gone()
-                emptyList.text = getString(R.string.retrieve_data)
-                loading.visible()
-
-            }
+        viewModel.networkStates.loadToRefresh();
+        viewModel.networkStates.valueForRefresh.observe(this, Observer {
             if (it.status == NetworkState.LOADED.status) {
                 swipeRefresh.isRefreshing = false
+                productAdapter.notifyDataSetChanged()
+                message("product updated successfully!!")
             }
+            if (it.status == NetworkState.error("Internet error!, Check Internet Connection").status) {
+                message("Internet error!, Check Internet Connection")
+                swipeRefresh.isRefreshing = false
+            }
+
         })
     }
 
@@ -254,7 +264,7 @@ class ProductActivity : AppCompatActivity() {
                         if (productAdapter.itemCount == 0) {
 
                             //if the loading is visible the search error view should be gone
-                            if (loading.isVisible){
+                            if (loading.isVisible) {
                                 relLayout.gone()
                             }
 
@@ -290,6 +300,17 @@ class ProductActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         swipeAction()
+    }
+
+    override fun onBackPressed() {
+
+        if (binding.searchProduct.isIconified){
+            ExitApp().show(supportFragmentManager, "dialog_exit_app")
+        }else{
+            Toast.makeText(this@ProductActivity,"Close search product field",Toast.LENGTH_SHORT).show()
+        }
+
+
     }
 
 }

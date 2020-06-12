@@ -70,7 +70,6 @@ interface ProductService {
         @Query("per_page") itemsPerPage: Int
     ): Call<List<Products>>
 
-
     companion object {
         private const val BASE_URL = "https://akwe.com.ng/wp-json/wc/v3/"
 

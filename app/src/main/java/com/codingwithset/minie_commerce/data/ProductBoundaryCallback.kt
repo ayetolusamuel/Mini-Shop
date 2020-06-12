@@ -15,6 +15,11 @@ class ProductBoundaryCallback(
     private val cache: ProductLocalCache
 ) : PagedList.BoundaryCallback<Products>() {
 
+    // keep the last requested page.
+    // When the request is successful, increment the page number.
+    private var lastRequestedPage = 1
+
+
 
 
 
@@ -35,12 +40,12 @@ and set it to 50. Our PagedList will then page data from the DataSource in chunk
         private const val CUSTOMER_SECRET = "cs_bed4f32d44a97c8bb6e7d23fb3a00b1c762e1969"
     }
 
-    // keep the last requested page.
-    // When the request is successful, increment the page number.
-    private var lastRequestedPage = 1
 
 
     private val _networkErrors = MutableLiveData<String>()
+
+    private val value = MutableLiveData<NetworkState>()
+    val valueForRefresh get() = value
 
 
     // LiveData of network errors.
@@ -51,48 +56,43 @@ and set it to 50. Our PagedList will then page data from the DataSource in chunk
     private var isRequestInProgress = false
 
 
-    /*
-Request data from web service[website] and save into database
-the error is set to [networkState] field property which is [MutableLiveData<String>]
-the function return LiveData of [NetworkState]
-the [deleteAllProducts] function will delete all products.
-Note that if database is empty [onZeroItemsLoaded] is called, which trigger the [requestAndSaveData]
- */
-    fun loadToRefresh(): LiveData<NetworkState> {
-        val networkState = MutableLiveData<NetworkState>()
-        networkState.value = NetworkState.LOADING
-
-        cache.deleteAllProducts(cache.productList.value!!){
-            networkState.postValue(NetworkState.LOADED)
-        }
-
-
-        return networkState
+    fun loadToRefresh() {
+        requestAndSaveData()
     }
 
-/*
-Request data from web service[website] and save into database
-if data insert to database [lastRequestedPage] is increment
-the [isRequestInProgress] help to avoid multiple query.
-the error is set to [_networkErrors] field property which is [MutableLiveData<String>]
- */
+
+
+
+    /*
+    Request data from web service[website] and save into database
+    if data insert to database [lastRequestedPage] is increment
+    the [isRequestInProgress] help to avoid multiple query.
+    the error is set to [_networkErrors] field property which is [MutableLiveData<String>]
+     */
     private fun requestAndSaveData() {
 
         if (isRequestInProgress) return
 
         isRequestInProgress = true
+        value.value = NetworkState.LOADING
         getProductsResult(service, CUSTOMER_KEY,
             CUSTOMER_SECRET, lastRequestedPage, NETWORK_PAGE_SIZE, { products ->
 
                 cache.insert(products) {
                     lastRequestedPage++
                     isRequestInProgress = false
+                    value.postValue(NetworkState.LOADED)
                 }
             }, { error ->
                 _networkErrors.postValue(error)
+                value.value = NetworkState.error(error)
                 isRequestInProgress = false
             })
     }
+
+
+
+
 
 
     override fun onZeroItemsLoaded() {

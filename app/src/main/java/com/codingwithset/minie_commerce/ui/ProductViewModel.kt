@@ -1,21 +1,18 @@
 package com.codingwithset.minie_commerce.ui
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import androidx.paging.PagedList
 import com.codingwithset.minie_commerce.model.ProductResult
 import com.codingwithset.minie_commerce.model.Products
 import com.codingwithset.minie_commerce.data.ProductRepository
-import javax.inject.Inject
+
 
 
 /**
  * ViewModel for the [ProductActivity] screen.
  * The [ProductViewModel] class communicate with the [ProductRepository] to get the data.
  */
-class ProductViewModel  @Inject constructor(private val repository: ProductRepository) : ViewModel() {
+class ProductViewModel (private val repository: ProductRepository) : ViewModel() {
 
 
     private val filterTextAll: MutableLiveData<String> = MutableLiveData()
@@ -38,6 +35,14 @@ class ProductViewModel  @Inject constructor(private val repository: ProductRepos
 
     private val _networkStates = repository.networkState
 
+
+    //private
+
+
+
+
+
+
     /*
     this field will be used in [ProductActivity] for refresh purpose
     When user swipe to refresh, the networkState will help us to perform some task with the view to be displayed.
@@ -50,6 +55,7 @@ class ProductViewModel  @Inject constructor(private val repository: ProductRepos
      */
     init {
         getData()
+
     }
 
 
@@ -83,4 +89,7 @@ class ProductViewModel  @Inject constructor(private val repository: ProductRepos
     private fun getAllProductForFilter(name: String): LiveData<PagedList<Products>> {
         return repository.getAllProductForFilter(name)
     }
+
+
+
 }

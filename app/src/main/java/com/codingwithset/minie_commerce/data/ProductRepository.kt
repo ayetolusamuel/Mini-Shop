@@ -7,7 +7,7 @@ import com.codingwithset.minie_commerce.api.ProductService
 import com.codingwithset.minie_commerce.db.ProductLocalCache
 import com.codingwithset.minie_commerce.model.ProductResult
 import com.codingwithset.minie_commerce.model.Products
-import javax.inject.Inject
+
 
 
 /**
@@ -24,6 +24,9 @@ class ProductRepository(
     the field will help for refresh purpose
      */
     val networkState = ProductBoundaryCallback(service, cache)
+
+
+
 
 
     /*
@@ -68,6 +71,10 @@ and set it to 30. Our PagedList will then page data from the DataSource in chunk
 
         private const val DATABASE_PAGE_SIZE = 20
     }
+
+
+
+
 
 
 }

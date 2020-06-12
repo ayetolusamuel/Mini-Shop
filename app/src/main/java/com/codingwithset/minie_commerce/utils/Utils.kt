@@ -42,27 +42,10 @@ fun View.gone() {
 
 }
 
-///**
-// * Check whether network is available by ping ip address/
-// * @return Whether device is connected to Network.
-// */
-//fun checkInternetAccess():Boolean{
-//    try {
-//        val process: Process = Runtime.getRuntime().exec("ping -c 1 8.8.8.8")
-//        val returnVal = process.waitFor()
-//        return (returnVal == 0)
-//    }catch (exception: Exception){
-//        exception.printStackTrace()
-//    }
-//   return false
-//
-//}
 
 
 /**
  * Check whether network is available
- *
- * @param context
  * @return Whether device is connected to Network.
  */
 fun Context.checkInternetAccess(): Boolean {
@@ -72,6 +55,7 @@ fun Context.checkInternetAccess(): Boolean {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 //Device is running on Marshmallow or later Android OS.
                 with(getNetworkCapabilities(activeNetwork)) {
+                    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
                     return hasTransport(NetworkCapabilities.TRANSPORT_WIFI) || hasTransport(
                         NetworkCapabilities.TRANSPORT_CELLULAR
                     )

@@ -1,8 +1,8 @@
 package com.codingwithset.minie_commerce.ui
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.graphics.Paint
 import android.net.Uri
 import android.os.Build
 import android.text.Html
@@ -27,6 +27,8 @@ class ProductAdapter(private val context: Context) :
     //this handle the viewBinding to avoid findByView
     private var _binding: LayoutProductBinding? = null
     private val binding get() = _binding!!
+
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -78,7 +80,10 @@ class ProductAdapter(private val context: Context) :
             }
             //am using my lib to format & add naira sign to the result of price retrieve from the web service
             //for more details about the library visit https://github.com/ayetolusamuel/currencysign
-            holder.actualPrice.text = Utils.inNaira(context, product.sale_price)
+            holder.actualPrice.text = Utils.inNaira(context, product.regular_price)
+            holder.discountPrice.text = Utils.inNaira(context, product.sale_price)
+
+            holder.actualPrice.paintFlags = holder.actualPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
 
 
             //get list of images, then loop through to get the Image,
@@ -152,10 +157,18 @@ class ProductViewHolder(binding: LayoutProductBinding) :
     val name = binding.name
     val shortDescription = binding.description
     val actualPrice = binding.actualPrice
+
+    val discountPrice = binding.discountPrice
+
     val productImage = binding.userImage
     val stockStatus: TextView = binding.status
     val rating = binding.productRating
     val ratingCount = binding.rateCount
     val quantity = binding.quantityValue
+
+
+    //remoteviews.setInt(R.id.YourTextView, "setPaintFlags", Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
+
+
 
 }

@@ -14,6 +14,8 @@
     <string name="search_for_product">search for product</string>
     <string name="company_logo">company logo</string>
     <string name="no_review">(No reviews yet)</string>
+    <string name="are_you_sure_you_want_to_exit_the_app">Are you sure you want to exit the App?</string>
+    <string name="no">NO</string>
 
 
 </resources>
