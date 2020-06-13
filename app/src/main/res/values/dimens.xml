@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="row_item_margin_vertical">16dp</dimen>
     <dimen name="_16_value">16dp</dimen>
     <dimen name="_3_value">3dp</dimen>
 
     <!-- elevation for Plant Detail toolbar - used to convert to pixels when hiding/showing -->
-    <dimen name="toolbar_elevation">5dp</dimen>
 </resources>

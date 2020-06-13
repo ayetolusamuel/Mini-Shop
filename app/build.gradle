@@ -12,17 +12,23 @@ android {
         applicationId "com.codingwithset.minie_commerce"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 2
-        versionName "2.0"
+        versionCode 3
+        versionName "2.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     // For Kotlin projects
@@ -75,7 +81,7 @@ dependencies {
 
 
     // retrofit & okHttpLoggingInterceptor dependencies
-    def retrofitVersion = "2.6.0"
+    def retrofitVersion = "2.7.1"
     def okhttpLoggingInterceptorVersion = "4.0.0"
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
@@ -83,7 +89,7 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttpLoggingInterceptorVersion"
 
     //glide
-    def glideVersion = "4.10.0"
+    def glideVersion = "4.11.0"
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
 

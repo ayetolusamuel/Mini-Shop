@@ -1,2 +1,2 @@
+include ':app:coroutinedemo'
 rootProject.name='Mini E-commerce'
-include ':app'
